@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+
+    macos:
+      xcode: "9.2.0"
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install ruby dependencies
+          command: bundle install
+
+      - run:
+          name: Run tests
+          command: make test
+
+      - run:
+          name: Build sample app
+          command: make build
+
+      - run:
+          name: Integrate using CocoaPods
+          command: make integrate_cocoapods

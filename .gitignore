@@ -12,3 +12,7 @@ site/
 
 # macOS
 .DS_Store
+
+# Bundler
+vendor
+.bundle

@@ -1,8 +1,8 @@
-source 'https://github.com/CocoaPods/Specs.git'
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 platform :tvos, '10.2'
 
 use_frameworks!
 
 target 'LayoutKit-tvOS' do
-  pod 'LayoutKit'
+  pod 'LayoutKit', :path => "../../../"
 end

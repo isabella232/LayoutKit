@@ -1,8 +1,9 @@
-source 'https://github.com/CocoaPods/Specs.git'
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
 platform :ios, '8.0'
 
 use_frameworks!
 
 target 'LayoutKit-iOS' do
-  pod 'LayoutKit'
+  pod 'LayoutKit', :path => "../../../"
 end
