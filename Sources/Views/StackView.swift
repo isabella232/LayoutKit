@@ -126,10 +126,10 @@ open class StackView: UIView {
 
 /// Wraps a UIView so that it conforms to the Layout protocol.
 private struct ViewLayout: ConfigurableLayout {
-
     let needsView = true
     let view: UIView
     let viewReuseId: String? = nil
+    let identifier: String = UUID().uuidString
 
     func measurement(within maxSize: CGSize) -> LayoutMeasurement {
         let size = view.sizeThatFits(maxSize)

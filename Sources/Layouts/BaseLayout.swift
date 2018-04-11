@@ -23,6 +23,8 @@ open class BaseLayout<V: View> {
     /// It is used to identify which views should be reused when animating from one layout to another.
     open let viewReuseId: String?
 
+    open let identifier: String = UUID().uuidString
+
     /// A configuration block that is run on the main thread after the view is created.
     open let config: ((V) -> Void)?
 

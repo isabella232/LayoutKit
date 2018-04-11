@@ -45,6 +45,32 @@ open class ReloadableViewLayoutAdapter: NSObject, ReloadableViewUpdateManagerDel
         reloadableView.registerViews(withReuseIdentifier: reuseIdentifier)
     }
 
+    public func indexPath(forLayoutIdentifier identifier: String) -> IndexPath? {
+        for (sectionIndex, section) in self.currentArrangement.enumerated() {
+
+            for (itemIndex, item) in section.items.enumerated() {
+                if self.searchLayoutArrangementTree(layoutArrangement: item, identifier: identifier) {
+                    return IndexPath(item: itemIndex, section: sectionIndex)
+                }
+            }
+        }
+        return nil
+    }
+
+    private func searchLayoutArrangementTree(layoutArrangement: LayoutArrangement, identifier: String) -> Bool {
+        if(layoutArrangement.layout.identifier == identifier) {
+            return true
+        }
+
+        for layout in layoutArrangement.sublayouts {
+            if searchLayoutArrangementTree(layoutArrangement: layout, identifier: identifier) {
+                return true
+            }
+        }
+
+        return false
+    }
+
     /**
      Reloads the view with the new layout.
 

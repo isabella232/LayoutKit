@@ -38,6 +38,40 @@ class ReloadableViewLayoutAdapterCollectionViewTests: ReloadableViewLayoutAdapte
     func testCollectionViewReloadAsyncCancelledOnViewDeinit() {
         verifyReloadAsyncCancelledOnViewDeinit(TestCollectionView())
     }
+
+    func testCollectionViewReloadFindIndexPathForLayout() {
+        let layout = LabelLayout(text: "interesting text")
+        let layoutArrangements = [LayoutArrangement(layout: layout, frame: .zero, sublayouts: [])]
+        let reloadableViewLayoutAdapter = reloadableViewLayoutAdapterWithArrangements(arrangements: layoutArrangements)
+
+        let indexPath = reloadableViewLayoutAdapter.indexPath(forLayoutIdentifier: layout.identifier)
+        XCTAssertEqual(indexPath, IndexPath(item: 0, section: 0))
+    }
+
+    func testCollectionViewReloadFindIndexPathForLayoutInTree() {
+        let layout = LabelLayout(text: "interesting text")
+        let layoutArrangements = [
+            LayoutArrangement(layout: LabelLayout(text: "text"), frame: .zero, sublayouts: [
+                StackLayout(axis: .vertical, sublayouts: [LabelLayout(text: "label"), layout]).arrangement()
+            ])
+        ]
+        let reloadableViewLayoutAdapter = reloadableViewLayoutAdapterWithArrangements(arrangements: layoutArrangements)
+        let indexPath = reloadableViewLayoutAdapter.indexPath(forLayoutIdentifier: layout.identifier)
+
+        XCTAssertEqual(indexPath, IndexPath(item: 0, section: 0))
+    }
+
+    // MARK: Private
+
+    private func reloadableViewLayoutAdapterWithArrangements(arrangements: [LayoutArrangement]) -> ReloadableViewLayoutAdapter {
+        let section = Section<[LayoutArrangement]>(items: arrangements)
+        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let reloadableViewLayoutAdapter = ReloadableViewLayoutAdapter(reloadableView: view)
+
+        reloadableViewLayoutAdapter.currentArrangement = [section]
+
+        return reloadableViewLayoutAdapter
+    }
 }
 
 private class TestCollectionView: LayoutAdapterCollectionView, TestableReloadableView {
