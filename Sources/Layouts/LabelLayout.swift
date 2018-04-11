@@ -133,6 +133,13 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
 
     open override func configure(view label: Label) {
         config?(label)
+
+        // Workaround for when re-using a UILabel with attributedText and
+        // then using the text property for updating the text. This caused
+        // text to be rendered in a defect way eg. truncating text even if
+        // there are enough space for the whole text.
+        label.text = nil
+
         label.numberOfLines = numberOfLines
         label.font = font
         switch text {
