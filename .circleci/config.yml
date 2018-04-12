@@ -3,10 +3,14 @@ jobs:
   build:
 
     macos:
-      xcode: "9.2.0"
+      xcode: "9.3.0"
 
     steps:
       - checkout
+
+      - run:
+          name: pre-start simulator
+          command: xcrun instruments -w "iPhone" || true
 
       - run:
           name: Install ruby dependencies
