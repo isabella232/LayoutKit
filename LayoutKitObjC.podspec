@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
   spec.name              = 'LayoutKitObjC'
-  spec.version           = '7.0.2'
+  spec.version           = '8.0.0'
   spec.license           = { :type => 'Apache License, Version 2.0' }
   spec.homepage          = 'http://layoutkit.org'
   spec.authors           = 'LinkedIn'
   spec.summary           = 'LayoutKit is a fast view layout library for iOS, macOS, and tvOS. Now with Objective-C support.'
-  spec.source            = { :git => 'https://github.com/linkedin/LayoutKit.git', :tag => spec.version }
+  spec.source            = { :git => 'https://github.com/ExpressenAB/LayoutKit.git', :tag => spec.version }
   spec.source_files      = 'Sources/**/*.{swift,h,m}'
   spec.documentation_url = 'http://layoutkit.org'
 
