@@ -39,6 +39,7 @@ open class StackLayout<V: View>: BaseLayout<V> {
                 alignment: Alignment = .fill,
                 flexibility: Flexibility? = nil,
                 viewReuseId: String? = nil,
+                viewReuseGroup: String? = nil,
                 sublayouts: [Layout],
                 config: ((V) -> Void)? = nil) {
 
@@ -47,7 +48,7 @@ open class StackLayout<V: View>: BaseLayout<V> {
         self.distribution = distribution
         self.sublayouts = sublayouts
         let flexibility = flexibility ?? StackLayout.defaultFlexibility(axis: axis, sublayouts: sublayouts)
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, config: config)
     }
 
     init(axis: Axis,
@@ -56,6 +57,7 @@ open class StackLayout<V: View>: BaseLayout<V> {
          alignment: Alignment = .fill,
          flexibility: Flexibility? = nil,
          viewReuseId: String? = nil,
+         viewReuseGroup: String? = nil,
          viewClass: V.Type? = nil,
          sublayouts: [Layout],
          config: ((V) -> Void)? = nil) {
@@ -65,7 +67,7 @@ open class StackLayout<V: View>: BaseLayout<V> {
         self.distribution = distribution
         self.sublayouts = sublayouts
         let flexibility = flexibility ?? StackLayout.defaultFlexibility(axis: axis, sublayouts: sublayouts)
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? V.self, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, viewClass: viewClass ?? V.self, config: config)
     }
 }
 

@@ -62,6 +62,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                 alignment: Alignment? = nil,
                 flexibility: Flexibility? = nil,
                 viewReuseId: String? = nil,
+                viewReuseGroup: String? = nil,
                 sublayout: Layout? = nil,
                 config: ((V) -> Void)? = nil) {
 
@@ -75,7 +76,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                                                                        maxWidth: maxWidth,
                                                                        minHeight: minHeight,
                                                                        maxHeight: maxHeight)
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, config: config)
     }
 
     init(minWidth: CGFloat? = nil,
@@ -85,6 +86,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
          alignment: Alignment? = nil,
          flexibility: Flexibility? = nil,
          viewReuseId: String? = nil,
+         viewReuseGroup: String? = nil,
          viewClass: V.Type? = nil,
          sublayout: Layout? = nil,
          config: ((V) -> Void)? = nil) {
@@ -99,7 +101,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                                                                        maxWidth: maxWidth,
                                                                        minHeight: minHeight,
                                                                        maxHeight: maxHeight)
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? V.self, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, viewClass: viewClass ?? V.self, config: config)
     }
 
     // MARK: - Convenience initializers
@@ -111,6 +113,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             alignment: Alignment? = nil,
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
+                            viewReuseGroup: String? = nil,
                             sublayout: Layout? = nil,
                             config: ((V) -> Void)? = nil) {
 
@@ -121,6 +124,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
                   config: config)
     }
@@ -131,6 +135,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             alignment: Alignment? = nil,
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
+                            viewReuseGroup: String? = nil,
                             sublayout: Layout? = nil,
                             config: ((V) -> Void)? = nil) {
 
@@ -141,6 +146,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
                   config: config)
     }
@@ -151,6 +157,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             alignment: Alignment? = nil,
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
+                            viewReuseGroup: String? = nil,
                             sublayout: Layout? = nil,
                             config: ((V) -> Void)? = nil) {
 
@@ -161,6 +168,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
                   config: config)
     }
@@ -169,6 +177,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             alignment: Alignment? = nil,
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
+                            viewReuseGroup: String? = nil,
                             sublayout: Layout? = nil,
                             config: ((V) -> Void)? = nil) {
 
@@ -177,6 +186,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
                   config: config)
     }
@@ -185,6 +195,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             alignment: Alignment? = nil,
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
+                            viewReuseGroup: String? = nil,
                             sublayout: Layout? = nil,
                             config: ((V) -> Void)? = nil) {
 
@@ -193,6 +204,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
                   config: config)
     }
@@ -201,6 +213,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             alignment: Alignment? = nil,
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
+                            viewReuseGroup: String? = nil,
                             sublayout: Layout? = nil,
                             config: ((V) -> Void)? = nil) {
 
@@ -209,6 +222,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
                   config: config)
     }

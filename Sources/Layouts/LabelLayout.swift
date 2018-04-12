@@ -25,13 +25,14 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
                 alignment: Alignment = LabelLayoutDefaults.defaultAlignment,
                 flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
                 viewReuseId: String? = nil,
+                viewReuseGroup: String? = nil,
                 config: ((Label) -> Void)? = nil) {
         
         self.text = text
         self.numberOfLines = numberOfLines
         self.font = font
         self.lineHeight = lineHeight ?? font.lineHeight
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, config: config)
     }
 
     init(attributedString: NSAttributedString,
@@ -41,6 +42,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
          alignment: Alignment = LabelLayoutDefaults.defaultAlignment,
          flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
          viewReuseId: String? = nil,
+         viewReuseGroup: String? = nil,
          viewClass: Label.Type? = nil,
          config: ((Label) -> Void)? = nil) {
 
@@ -48,7 +50,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
         self.numberOfLines = numberOfLines
         self.font = font
         self.lineHeight = lineHeight ?? font.lineHeight
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? Label.self, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, viewClass: viewClass ?? Label.self, config: config)
     }
 
     init(string: String,
@@ -77,6 +79,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
                             alignment: Alignment = LabelLayoutDefaults.defaultAlignment,
                             flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
                             viewReuseId: String? = nil,
+                            viewReuseGroup: String? = nil,
                             config: ((Label) -> Void)? = nil) {
 
         self.init(text: .unattributed(text),
@@ -86,6 +89,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  viewReuseGroup: viewReuseGroup,
                   config: config)
     }
 
@@ -96,6 +100,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
                             alignment: Alignment = LabelLayoutDefaults.defaultAlignment,
                             flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
                             viewReuseId: String? = nil,
+                            viewReuseGroup: String? = nil,
                             config: ((Label) -> Void)? = nil) {
 
         self.init(text: .attributed(attributedText),
@@ -105,6 +110,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  viewReuseGroup: viewReuseGroup,
                   config: config)
     }
 

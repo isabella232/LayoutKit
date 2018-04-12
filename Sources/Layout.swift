@@ -106,6 +106,14 @@ public protocol Layout {
      */
     var viewReuseId: String? { get }
 
+
+    /**
+     An identifier that specifies the type view content
+
+     Use this identifier enable view reuse between layouts that produce same kind of views.
+    */
+    var viewReuseGroup: String? { get }
+
     var identifier: String { get }
 }
 

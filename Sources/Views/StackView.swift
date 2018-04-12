@@ -129,6 +129,7 @@ private struct ViewLayout: ConfigurableLayout {
     let needsView = true
     let view: UIView
     let viewReuseId: String? = nil
+    let viewReuseGroup: String? = nil
     let identifier: String = UUID().uuidString
 
     func measurement(within maxSize: CGSize) -> LayoutMeasurement {
