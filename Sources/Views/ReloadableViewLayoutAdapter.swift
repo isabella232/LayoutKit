@@ -242,7 +242,7 @@ open class ReloadableViewLayoutAdapter: NSObject, ReloadableViewUpdateManagerDel
         let operation = BlockOperation()
 
         operation.addExecutionBlock { [weak self, weak operation] in
-            let arrangements: [Section<[LayoutArrangement]>] = layoutProvider().flatMap { sectionLayout in
+            let arrangements: [Section<[LayoutArrangement]>] = layoutProvider().compactMap { sectionLayout in
                 if operation?.isCancelled ?? true {
                     return nil
                 }
@@ -253,7 +253,7 @@ open class ReloadableViewLayoutAdapter: NSObject, ReloadableViewUpdateManagerDel
             }
 
             let mainOperation = BlockOperation(block: {
-                let animations: [Animation] = items.flatMap({ indexPath in
+                let animations: [Animation] = items.compactMap({ indexPath in
                     guard let contentView = self?.reloadableView?.contentView(forIndexPath: indexPath) else { return nil }
                     let arrangement = arrangements[indexPath.section].items[indexPath.item]
                     return arrangement.prepareAnimation(for: contentView)
