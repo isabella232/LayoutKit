@@ -14,23 +14,23 @@
 open class BaseLayout<V: View> {
 
     /// The layout's alignment inside of the rect that it is assigned during arrangement.
-    open let alignment: Alignment
+    public let alignment: Alignment
 
     /// The flexibility of the layout along both dimensions.
-    open let flexibility: Flexibility
+    public let flexibility: Flexibility
 
     /// An identifier for the layout.
     /// It is used to identify which views should be reused when animating from one layout to another.
-    open let viewReuseId: String?
+    public let viewReuseId: String?
 
     /// An identifier for layouts that produce same view
     /// It is used to identify if view can be reused for another layout
-    open let viewReuseGroup: String?
+    public let viewReuseGroup: String?
 
-    open let identifier: String = UUID().uuidString
+    public let identifier: String = UUID().uuidString
 
     /// A configuration block that is run on the main thread after the view is created.
-    open let config: ((V) -> Void)?
+    public let config: ((V) -> Void)?
 
     open var needsView: Bool {
         return config != nil
