@@ -19,6 +19,10 @@ extension LOKAxis {
     }
 }
 
+
+/**
+ Specifies how excess space along the axis is allocated.
+ */
 extension LOKStackLayoutDistribution {
     var distribution: StackLayoutDistribution? {
         switch self {
@@ -40,7 +44,52 @@ extension LOKStackLayoutDistribution {
     }
 }
 
+/**
+ A layout that stacks sublayouts along an axis.
+
+ Axis space is allocated to sublayouts according to the distribution policy.
+
+ If this not enough space along the axis for all sublayouts then layouts with the highest flexibility are removed
+ until there is enough space to posistion the remaining layouts.
+ */
 @objc open class LOKStackLayout: LOKBaseLayout {
+
+    /**
+     Axis along which sublayouts are stacked.
+     */
+    @objc public let axis: LOKAxis
+
+    /**
+     The distance in points between adjacent edges of sublayouts along the axis.
+     For `Distribution.EqualSpacing`, this is a minimum spacing. For all other distributions it is an exact spacing.
+     */
+    @objc public let spacing: CGFloat
+
+    /**
+     Distribution of space along the stack's axis.
+     */
+    @objc public let distribution: LOKStackLayoutDistribution
+
+    /**
+     Specifies how this layout is positioned inside its parent layout.
+     */
+    @objc public let alignment: LOKAlignment
+
+    /**
+     Class object for the view class to be created.
+     */
+    @objc public let viewClass: View.Type
+
+    /**
+     The stacked layouts.
+     */
+    @objc public let sublayouts: [LOKLayout]
+
+    /**
+     Layoutkit configuration block called with created view.
+     */
+    @objc public let configure: ((View) -> Void)?
+
     @objc public init(axis: LOKAxis = .vertical,
                       spacing: CGFloat = 0,
                       distribution: LOKStackLayoutDistribution = .`default`,
@@ -50,15 +99,22 @@ extension LOKStackLayoutDistribution {
                       viewReuseId: String? = nil,
                       sublayouts: [LOKLayout]?,
                       configure: ((View) -> Void)? = nil) {
+        self.axis = axis
+        self.spacing = spacing
+        self.distribution = distribution.distribution != nil ? distribution : .fillFlexing
+        self.sublayouts = sublayouts ?? []
+        self.alignment = alignment ?? .fill
+        self.viewClass = viewClass ?? View.self
+        self.configure = configure
         super.init(layout: StackLayout(
-            axis: axis.axis,
-            spacing: spacing,
-            distribution: distribution.distribution ?? .fillFlexing,
-            alignment: alignment?.alignment ?? .topFill,
+            axis: self.axis.axis,
+            spacing: self.spacing,
+            distribution: self.distribution.distribution ?? .fillFlexing,
+            alignment: self.alignment.alignment,
             flexibility: flexibility?.flexibility,
             viewReuseId: viewReuseId,
-            viewClass: viewClass,
-            sublayouts: sublayouts?.map { $0.unwrapped } ?? [],
-            config: configure))
+            viewClass: self.viewClass,
+            sublayouts: self.sublayouts.map { $0.unwrapped },
+            config: self.configure))
     }
 }

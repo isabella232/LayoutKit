@@ -155,7 +155,7 @@ private struct ViewLayout: ConfigurableLayout {
         return Flexibility(horizontal: horizontal, vertical: vertical)
     }
 
-    private func flexForAxis(_ axis: UILayoutConstraintAxis) -> Flexibility.Flex {
+    private func flexForAxis(_ axis: NSLayoutConstraint.Axis) -> Flexibility.Flex {
         switch view.contentHuggingPriority(for: .horizontal) {
         case UILayoutPriority.required:
             return nil

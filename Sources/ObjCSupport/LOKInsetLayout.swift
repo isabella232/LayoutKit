@@ -8,20 +8,56 @@
 
 import CoreGraphics
 
+/**
+ A layout that insets another layout.
+ */
 @objc open class LOKInsetLayout: LOKBaseLayout {
-    @objc public required init(insets: EdgeInsets,
-                               alignment: LOKAlignment? = nil,
-                               viewReuseId: String? = nil,
-                               viewClass: View.Type? = nil,
-                               sublayout: LOKLayout,
-                               configure: ((View) -> Void)? = nil) {
+
+    /**
+     `EdgeInsets` for layout.
+     */
+    @objc public let insets: EdgeInsets
+
+    /**
+     Specifies how a layout positions itself inside of its parent view.
+     */
+    @objc public let alignment: LOKAlignment
+
+    /**
+     Class object for the view class to be created.
+     */
+    @objc public let viewClass: View.Type
+
+    /**
+     Sublayout for `LOKInsetLayout`.
+     */
+    @objc public let sublayout: LOKLayout
+
+    /**
+     LayoutKit configuration block called with created View.
+     */
+    @objc public let configure: ((View) -> Void)?
+
+    @objc public init(insets: EdgeInsets,
+                      alignment: LOKAlignment? = nil,
+                      flexibility: LOKFlexibility? = nil,
+                      viewReuseId: String? = nil,
+                      viewClass: View.Type? = nil,
+                      sublayout: LOKLayout,
+                      configure: ((View) -> Void)? = nil) {
+        self.insets = insets
+        self.sublayout = sublayout
+        self.alignment = alignment ?? .fill
+        self.viewClass = viewClass ?? View.self
+        self.configure = configure
         let layout = InsetLayout(
-            insets: insets,
-            alignment: alignment?.alignment ?? .fill,
+            insets: self.insets,
+            alignment: self.alignment.alignment,
+            flexibility: flexibility?.flexibility,
             viewReuseId: viewReuseId,
-            sublayout: sublayout.unwrapped,
-            viewClass: viewClass ?? View.self,
-            config: configure)
+            sublayout: self.sublayout.unwrapped,
+            viewClass: self.viewClass,
+            config: self.configure)
         super.init(layout: layout)
     }
 
