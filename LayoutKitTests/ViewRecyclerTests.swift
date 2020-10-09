@@ -105,6 +105,7 @@ class ViewRecyclerTests: XCTestCase {
         XCTAssertEqual(v, newView)
         XCTAssertEqual(newView.viewReuseId, "2")
         XCTAssertEqual(newView.viewReuseGroup, "group2")
+    }
 
     func testRootSubviewsMarkedAsManaged() {
         let root = View()
@@ -133,13 +134,13 @@ class ViewRecyclerTests: XCTestCase {
         let recycler = ViewRecycler(rootView: root)
 
         // Reuse one so it is not purged from the view hierarchy
-        _ = recycler.makeOrRecycleView(havingViewReuseId: "1", viewProvider: {
+        _ = recycler.makeOrRecycleView(havingViewReuseId: "1", orViewReuseGroup: nil, viewProvider: {
             XCTFail("view should have been recycled")
             return View()
         })
 
         let expectedView = View()
-        let v: View? = recycler.makeOrRecycleView(havingViewReuseId: "2", viewProvider: {
+        let v: View? = recycler.makeOrRecycleView(havingViewReuseId: "2", orViewReuseGroup: nil, viewProvider: {
             return expectedView
         })
         XCTAssertEqual(v, expectedView)
@@ -163,7 +164,7 @@ class ViewRecyclerTests: XCTestCase {
         root.addSubview(one)
 
         let recycler = ViewRecycler(rootView: root)
-        let v: View? = recycler.makeOrRecycleView(havingViewReuseId: "1", viewProvider: {
+        let v: View? = recycler.makeOrRecycleView(havingViewReuseId: "1",orViewReuseGroup: nil, viewProvider: {
             XCTFail("view should have been recycled")
             return View()
         })
@@ -216,7 +217,6 @@ class ViewRecyclerTests: XCTestCase {
         recycler.purgeViews()
         XCTAssertNotNil(one.superview)
     }
-
 }
 
 extension View {
