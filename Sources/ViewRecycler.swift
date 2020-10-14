@@ -39,7 +39,7 @@ class ViewRecycler {
             view.type = .managed
         }
         
-        rootView.walkSubviews { view in
+        rootView.walkNonRootSubviews { view in
              self.viewStorage.add(view: view)
          }
     }
@@ -110,14 +110,6 @@ extension View {
         // Indicates the view is managed by LayoutKit and is a root of a view hierarchy instantiated (or updated) by `makeViews`.
         // Used to separate such nested hierarchies so that updating the outer hierarchy doesn't disturb any nested hierarchies.
         case root
-    }
-    
-    /// Calls visitor for each transitive subview.
-    func walkSubviews(visitor: (View) -> Void) {
-        for subview in subviews {
-            visitor(subview)
-            subview.walkSubviews(visitor: visitor)
-        }
     }
 
     /// Calls visitor for each transitive subview.
