@@ -2,7 +2,6 @@ name: TEST
 
 on:
   pull_request:
-    branches: [ master ]
 
 jobs:
 
