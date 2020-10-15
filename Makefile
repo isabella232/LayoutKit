@@ -11,7 +11,7 @@ build:
 		-scheme LayoutKitSampleApp \
 		-sdk iphonesimulator14.0 \
 		-derivedDataPath $(DERIVED_DATA) \
-		-destination 'platform=iOS Simulator,name=iPhone 6,OS=12.4' \
+		-destination 'platform=iOS Simulator,name=iPhone 6' \
 		OTHER_SWIFT_FLAGS='-Xfrontend -debug-time-function-bodies' \
 		| tee $(BUILD_LOG) | bundle exec xcpretty
 	cat $(BUILD_LOG) | sh debug-time-function-bodies.sh
@@ -23,7 +23,7 @@ test:
 		-scheme LayoutKit-iOS \
 		-sdk iphonesimulator14.0 \
 		-derivedDataPath $(DERIVED_DATA) \
-		-destination 'platform=iOS Simulator,name=iPhone 6,OS=12.4' \
+		-destination 'platform=iOS Simulator,name=iPhone 6' \
 		OTHER_SWIFT_FLAGS='-Xfrontend -debug-time-function-bodies' \
 		| tee $(BUILD_LOG) | bundle exec xcpretty
 	cat $(BUILD_LOG) | sh debug-time-function-bodies.sh
@@ -36,7 +36,7 @@ integrate_cocoapods:
 		-scheme LayoutKit-iOS \
 		-sdk iphonesimulator14.0 \
 		-derivedDataPath $(DERIVED_DATA) \
-		-destination 'platform=iOS Simulator,name=iPhone 6,OS=12.4' \
+		-destination 'platform=iOS Simulator,name=iPhone 6' \
 		OTHER_SWIFT_FLAGS='-Xfrontend -debug-time-function-bodies' \
 		| tee $(BUILD_LOG) | bundle exec xcpretty
 	cat $(BUILD_LOG) | sh debug-time-function-bodies.sh
