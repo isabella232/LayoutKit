@@ -170,7 +170,11 @@ open class ButtonLayout<Button: UIButton>: BaseLayout<Button>, ConfigurableLayou
                 #if os(tvOS)
                     return CGSize(width: 37, height: 46)
                 #else
+                if #available(iOS 13.0, *) {
+                    return CGSize(width: 25, height: 24)
+                } else {
                     return CGSize(width: 22, height: 22)
+                }
                 #endif
             }
         }
@@ -293,7 +297,7 @@ public enum ButtonLayoutType {
     case infoDark
     case contactAdd
 
-    public var buttonType: UIButtonType {
+    public var buttonType: UIButton.ButtonType {
         switch (self) {
         case .custom:
             return .custom

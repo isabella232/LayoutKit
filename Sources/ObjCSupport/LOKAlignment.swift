@@ -8,6 +8,9 @@
 
 import CoreGraphics
 
+/**
+ Specifies how a layout positions itself inside of the rect that it is given to it by its parent during arrangement.
+ */
 @objc open class LOKAlignment: NSObject {
     let alignment: Alignment
     init(alignment: Alignment) {
@@ -29,7 +32,11 @@ import CoreGraphics
     @objc public static let fillLeading = LOKAlignment(alignment: .fillLeading)
     @objc public static let fillTrailing = LOKAlignment(alignment: .fillTrailing)
     @objc public static let fillCenter = LOKAlignment(alignment: Alignment(vertical: .fill, horizontal: .center))
+    @objc public static let aspectFit = LOKAlignment(alignment: .aspectFit)
 
+    /**
+     Positions a rect of the given size inside the given rect using the alignment spec.
+     */
     @objc public func position(size: CGSize, in rect: CGRect) -> CGRect {
         return alignment.position(size: size, in: rect)
     }

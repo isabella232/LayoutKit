@@ -6,21 +6,77 @@
 // software distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
-#import "LOKBaseLayoutBuilder.h"
+#import "LOKLayoutBuilder.h"
 
 @class LOKTextViewLayout;
+/**
+ LayoutBuilder for @c LOKTextViewLayout.
+ */
+@interface LOKTextViewLayoutBuilder: NSObject<LOKLayoutBuilder>
 
-@interface LOKTextViewLayoutBuilder : LOKBaseLayoutBuilder
+/**
+ Creates a @c LOKTextViewLayoutBuilder with the given string.
+ @param string The string set to the underlying @c UITextView's text.
+ */
+- (nonnull instancetype)initWithString:(nullable NSString *)string;
+
+/**
+ Creates a @c LOKTextViewLayoutBuilder with the given attributed string.
+ @param attributedString The attributed string set as the underlying @c UITextView's attributedText.
+ */
+- (nonnull instancetype)initWithAttributedString:(nullable NSAttributedString *)attributedString;
 
 + (nonnull instancetype)withString:(nullable NSString *)string;
 + (nonnull instancetype)withAttributedString:(nullable NSAttributedString *)attributedString;
 
-@property (nonatomic, nullable) NSString *string;
-@property (nonatomic, nullable) NSAttributedString *attributedString;
-@property (nonatomic, nullable) UIFont *font;
-@property (nonatomic) UIEdgeInsets textContainerInset;
-@property (nonatomic) CGFloat lineFragmentPadding;
+/**
+ @c LOKTextViewLayoutBuilder block for setting font of the @c LOKTextViewLayout.
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayoutBuilder * _Nonnull(^font)(UIFont * _Nullable);
 
-- (nonnull LOKTextViewLayout *)build;
+/**
+ @c LOKTextViewLayoutBuilder block for setting insets for the text container of @c UITextViewLayout.
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayoutBuilder * _Nonnull(^textContainerInset)(UIEdgeInsets);
+
+/**
+ @c LOKTextViewLayoutBuilder block for setting line padding between text container and actual text in @c LOKTextViewLayout.
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayoutBuilder * _Nonnull(^lineFragmentPadding)(CGFloat);
+
+/**
+ @c LOKTextViewLayoutBuilder block for defining how this layout is positioned inside its parent layout.
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayoutBuilder * _Nonnull(^alignment)(LOKAlignment * _Nullable);
+
+/**
+ @c LOKTextViewLayoutBuilder block for setting flexibility of the @c LOKTextViewLayout.
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayoutBuilder * _Nonnull(^flexibility)(LOKFlexibility * _Nullable);
+
+/**
+ @c LOKTextViewLayoutBuilder block for setting the viewReuseId used by LayoutKit.
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayoutBuilder * _Nonnull(^viewReuseId)(NSString * _Nullable);
+
+/**
+ @c LOKTextViewLayoutBuilder block for setting the view class of the @c LOKTextViewLayout(should be @c UITextView
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayoutBuilder * _Nonnull(^viewClass)(Class _Nullable);
+
+/**
+ Layoutkit configuration block called with the created @c UITextView (or subclass).
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayoutBuilder * _Nonnull(^config)( void(^ _Nullable)(UITextView *_Nonnull));
+
+/**
+ @c LOKTextViewLayoutBuilder block for setting edge inset (positive) for the @c LOKTextViewLayout.
+ */
+@property (nonatomic, nonnull, readonly) LOKInsetLayoutBuilder * _Nonnull(^insets)(LOKEdgeInsets);
+
+/**
+ Calling this builds and returns the @c LOKTextViewLayout.
+ */
+@property (nonatomic, nonnull, readonly) LOKTextViewLayout *layout;
 
 @end
