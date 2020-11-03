@@ -44,9 +44,9 @@ extension ReloadableViewLayoutAdapter: UICollectionViewDataSource {
 
     /// - Warning: Subclasses that override this method must call super
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = currentArrangement[indexPath.section].items[indexPath.item]
+        let arrangement = currentArrangement[safe: indexPath.section]?.items[safe: indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        item.makeViews(in: cell.contentView)
+        arrangement?.makeViews(in: cell.contentView)
         return cell
     }
 
@@ -65,5 +65,11 @@ extension ReloadableViewLayoutAdapter: UICollectionViewDataSource {
         }
         arrangement?.makeViews(in: view)
         return view
+    }
+}
+
+fileprivate extension Collection {
+    subscript(safe index: Index) -> Element? {
+        return index >= startIndex && index < endIndex ? self[index] : nil
     }
 }

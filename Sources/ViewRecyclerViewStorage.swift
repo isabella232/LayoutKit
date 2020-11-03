@@ -17,7 +17,7 @@ final class ViewRecyclerViewStorage {
     }
 
     func popView(withReuseId viewId: String) -> View? {
-        guard let index = self.views.index(where: { $0.viewReuseId == viewId }) else {
+        guard let index = self.views.firstIndex(where: { $0.viewReuseId == viewId }) else {
             return nil
         }
         return self.views.remove(at: index)
@@ -25,7 +25,7 @@ final class ViewRecyclerViewStorage {
 
     func popView(withReuseGroup viewGroup: String) -> View? {
 
-        guard let index = self.views.index(where: { $0.viewReuseGroup == viewGroup }) else {
+        guard let index = self.views.firstIndex(where: { $0.viewReuseGroup == viewGroup }) else {
             return nil
         }
         return self.views.remove(at: index)
@@ -36,7 +36,7 @@ final class ViewRecyclerViewStorage {
     }
 
     func remove(view: View) {
-        if let index = self.views.index(where: { $0 == view }) {
+        if let index = self.views.firstIndex(where: { $0 == view }) {
             self.views.remove(at: index)
         }
     }
