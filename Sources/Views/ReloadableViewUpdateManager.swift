@@ -9,7 +9,7 @@
 import Foundation
 
 /// Delegate for a `ReloadableViewUpdateManager`.
-protocol ReloadableViewUpdateManagerDelegate: class {
+protocol ReloadableViewUpdateManagerDelegate: AnyObject {
     var reloadableView: ReloadableView? { get }
     var currentArrangement: [Section<[LayoutArrangement]>] { get set }
 }

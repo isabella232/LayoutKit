@@ -15,7 +15,7 @@ import UIKit
 
  UITableView and UICollectionView conform to this protocol.
  */
-public protocol ReloadableView: class {
+public protocol ReloadableView: AnyObject {
 
     /// The bounds rectangle, which describes the view’s location and size in its own coordinate system.
     var bounds: CGRect { get }
