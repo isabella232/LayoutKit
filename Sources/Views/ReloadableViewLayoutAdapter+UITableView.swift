@@ -41,9 +41,11 @@ extension ReloadableViewLayoutAdapter: UITableViewDelegate {
         guard let layout = layout else {
             return nil
         }
-        let view = dequeueHeaderFooterView(tableView: tableView)
+        var view: UIView?
         UIView.performWithoutAnimation {
-            layout.makeViews(in: view.contentView)
+            let queuedView = dequeueHeaderFooterView(tableView: tableView)
+            layout.makeViews(in: queuedView.contentView)
+            view = queuedView
         }
         return view
     }
@@ -73,9 +75,10 @@ extension ReloadableViewLayoutAdapter: UITableViewDataSource {
 
     /// - Warning: Subclasses that override this method must call super
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = currentArrangement[indexPath.section].items[indexPath.item]
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        var cell: UITableViewCell!
         UIView.performWithoutAnimation {
+            let item = currentArrangement[indexPath.section].items[indexPath.item]
+            cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
             item.makeViews(in: cell.contentView)
         }
         return cell

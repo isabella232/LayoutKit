@@ -46,8 +46,9 @@ class TableViewController<ContentViewType: UIView>: UITableViewController where 
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CellType = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CellType
+        var cell: CellType!
         UIView.performWithoutAnimation {
+            cell: CellType = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CellType
             cell.setData(data[indexPath.row])
         }
         return cell

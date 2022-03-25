@@ -44,9 +44,10 @@ extension ReloadableViewLayoutAdapter: UICollectionViewDataSource {
 
     /// - Warning: Subclasses that override this method must call super
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let arrangement = currentArrangement[safe: indexPath.section]?.items[safe: indexPath.item]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        var cell: UICollectionViewCell!
         UIView.performWithoutAnimation {
+            let arrangement = currentArrangement[safe: indexPath.section]?.items[safe: indexPath.item]
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
             arrangement?.makeViews(in: cell.contentView)
         }
         return cell
@@ -54,18 +55,19 @@ extension ReloadableViewLayoutAdapter: UICollectionViewDataSource {
 
     /// - Warning: Subclasses that override this method must call super
     open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentifier, for: indexPath)
-        let arrangement: LayoutArrangement?
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            arrangement = currentArrangement[indexPath.section].header
-        case UICollectionView.elementKindSectionFooter:
-            arrangement = currentArrangement[indexPath.section].footer
-        default:
-            arrangement = nil
-            assertionFailure("unknown supplementary view kind \(kind)")
-        }
+        var view: UICollectionReusableView!
         UIView.performWithoutAnimation {
+            view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentifier, for: indexPath)
+            let arrangement: LayoutArrangement?
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                arrangement = currentArrangement[indexPath.section].header
+            case UICollectionView.elementKindSectionFooter:
+                arrangement = currentArrangement[indexPath.section].footer
+            default:
+                arrangement = nil
+                assertionFailure("unknown supplementary view kind \(kind)")
+            }
             arrangement?.makeViews(in: view)
         }
         return view

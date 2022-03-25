@@ -60,6 +60,9 @@ class FeedItemLayoutKitView: UIView, DataBinder {
     }
 
     override func layoutSubviews() {
-        layout?.measurement(within: bounds.size).arrangement(within: bounds).makeViews(in: self)
+        super.layoutSubviews()
+        UIView.performWithoutAnimation {
+            layout?.measurement(within: bounds.size).arrangement(within: bounds).makeViews(in: self)
+        }
     }
 }
