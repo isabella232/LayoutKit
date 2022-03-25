@@ -43,7 +43,9 @@ class FeedItemLayoutKitView: UIView, DataBinder {
             actorComment: data.actorComment)
         
         // Assure that `layoutSubviews` is called
-        setNeedsLayout()
+        UIView.performWithoutAnimation {
+            setNeedsLayout()
+        }
         
         // Only calculate height for valid width
         if bounds.width > 0 {

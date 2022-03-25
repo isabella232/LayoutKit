@@ -120,7 +120,9 @@ class FeedItemManualView: UIView, DataBinder {
         contentTitleLabel.text = data.contentTitle
         contentDomainLabel.text = data.contentDomain
         actorCommentLabel.text = data.actorComment
-        setNeedsLayout()
+        UIView.performWithoutAnimation {
+            setNeedsLayout()
+        }
     }
 
     override func layoutSubviews() {

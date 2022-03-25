@@ -57,7 +57,9 @@ extension UICollectionView: ReloadableView {
         reloadData()
 
         // Force a layout so that it is safe to call insert after this.
-        layoutIfNeeded()
+        UIView.performWithoutAnimation {
+            layoutIfNeeded()
+        }
     }
 
     @objc

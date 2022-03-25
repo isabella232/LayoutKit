@@ -80,7 +80,9 @@ open class StackView: UIView {
             addSubview(subview)
         }
         invalidateIntrinsicContentSize()
-        setNeedsLayout()
+        UIView.performWithoutAnimation {
+            setNeedsLayout()
+        }
     }
 
     /**
@@ -92,7 +94,9 @@ open class StackView: UIView {
         }
         arrangedSubviews.removeAll()
         invalidateIntrinsicContentSize()
-        setNeedsLayout()
+        UIView.performWithoutAnimation {
+            setNeedsLayout()
+        }
     }
 
     open override func sizeThatFits(_ size: CGSize) -> CGSize {
