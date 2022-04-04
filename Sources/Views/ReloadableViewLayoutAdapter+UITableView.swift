@@ -42,7 +42,9 @@ extension ReloadableViewLayoutAdapter: UITableViewDelegate {
             return nil
         }
         let view = dequeueHeaderFooterView(tableView: tableView)
-        layout.makeViews(in: view.contentView)
+        UIView.performWithoutAnimation {
+            layout.makeViews(in: view.contentView)
+        }
         return view
     }
 
@@ -73,7 +75,9 @@ extension ReloadableViewLayoutAdapter: UITableViewDataSource {
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = currentArrangement[indexPath.section].items[indexPath.item]
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        item.makeViews(in: cell.contentView)
+        UIView.performWithoutAnimation {
+            item.makeViews(in: cell.contentView)
+        }
         return cell
     }
 }

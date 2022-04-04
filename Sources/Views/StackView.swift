@@ -105,11 +105,9 @@ open class StackView: UIView {
 
     open override func layoutSubviews() {
         super.layoutSubviews()
-        UIView.performWithoutAnimation {
-            stackLayout.measurement(within: bounds.size)
-                .arrangement(within: bounds)
-                .makeViews(in: self)
-        }
+        stackLayout.measurement(within: bounds.size)
+            .arrangement(within: bounds)
+            .makeViews(in: self)
     }
 
     private var stackLayout: Layout {

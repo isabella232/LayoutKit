@@ -46,7 +46,9 @@ extension ReloadableViewLayoutAdapter: UICollectionViewDataSource {
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let arrangement = currentArrangement[safe: indexPath.section]?.items[safe: indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        arrangement?.makeViews(in: cell.contentView)
+        UIView.performWithoutAnimation {
+            arrangement?.makeViews(in: cell.contentView)
+        }
         return cell
     }
 
@@ -63,7 +65,9 @@ extension ReloadableViewLayoutAdapter: UICollectionViewDataSource {
             arrangement = nil
             assertionFailure("unknown supplementary view kind \(kind)")
         }
-        arrangement?.makeViews(in: view)
+        UIView.performWithoutAnimation {
+            arrangement?.makeViews(in: view)
+        }
         return view
     }
 }
