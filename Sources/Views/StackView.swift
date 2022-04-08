@@ -104,7 +104,10 @@ open class StackView: UIView {
     }
 
     open override func layoutSubviews() {
-        stackLayout.measurement(within: bounds.size).arrangement(within: bounds).makeViews(in: self)
+        super.layoutSubviews()
+        stackLayout.measurement(within: bounds.size)
+            .arrangement(within: bounds)
+            .makeViews(in: self)
     }
 
     private var stackLayout: Layout {
