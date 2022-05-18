@@ -502,9 +502,14 @@ private class TestLabelLayout: SizeLayout<UILabel> {
             minHeight: height,
             maxHeight: height,
             alignment: .fill,
+            flexibility: nil,
+            viewReuseId: nil,
+            viewReuseGroup: nil,
+            sublayout: nil,
             config: { label in
                 label.text = text
-            }
+            },
+            identifier: nil
         )
     }
 }
