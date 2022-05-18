@@ -64,7 +64,8 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                 viewReuseId: String? = nil,
                 viewReuseGroup: String? = nil,
                 sublayout: Layout? = nil,
-                config: ((V) -> Void)? = nil) {
+                config: ((V) -> Void)? = nil,
+                identifier: String? = nil) {
 
         self.minWidth = minWidth
         self.maxWidth = maxWidth
@@ -76,7 +77,12 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                                                                        maxWidth: maxWidth,
                                                                        minHeight: minHeight,
                                                                        maxHeight: maxHeight)
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, config: config)
+        
+        if let identifier = identifier {
+            super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, config: config, identifier: identifier)
+        } else {
+            super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewReuseGroup: viewReuseGroup, config: config)
+        }
     }
 
     init(minWidth: CGFloat? = nil,
@@ -126,7 +132,8 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   viewReuseId: viewReuseId,
                   viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
-                  config: config)
+                  config: config,
+                  identifier: nil)
     }
 
     public convenience init(width: CGFloat,
@@ -148,7 +155,8 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   viewReuseId: viewReuseId,
                   viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
-                  config: config)
+                  config: config,
+                  identifier: nil)
     }
 
     public convenience init(height: CGFloat,
@@ -170,7 +178,8 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   viewReuseId: viewReuseId,
                   viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
-                  config: config)
+                  config: config,
+                  identifier: nil)
     }
 
     public convenience init(size: CGSize,
@@ -206,7 +215,8 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   viewReuseId: viewReuseId,
                   viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
-                  config: config)
+                  config: config,
+                  identifier: nil)
     }
 
     public convenience init(minSize: CGSize,
@@ -224,7 +234,8 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   viewReuseId: viewReuseId,
                   viewReuseGroup: viewReuseGroup,
                   sublayout: sublayout,
-                  config: config)
+                  config: config,
+                  identifier: nil)
     }
 
     // MARK: - Initialization helpers

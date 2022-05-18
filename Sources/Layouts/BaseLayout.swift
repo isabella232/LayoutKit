@@ -27,7 +27,7 @@ open class BaseLayout<V: View> {
     /// It is used to identify if view can be reused for another layout
     public let viewReuseGroup: String?
 
-    public let identifier: String = UUID().uuidString
+    public let identifier: String
 
     /// A configuration block that is run on the main thread after the view is created.
     public let config: ((V) -> Void)?
@@ -38,22 +38,24 @@ open class BaseLayout<V: View> {
 
     private let viewClass: View.Type
 
-    public init(alignment: Alignment, flexibility: Flexibility, viewReuseId: String? = nil, viewReuseGroup: String? = nil, config: ((V) -> Void)?) {
+    public init(alignment: Alignment, flexibility: Flexibility, viewReuseId: String? = nil, viewReuseGroup: String? = nil, config: ((V) -> Void)?, identifier: String = UUID().uuidString) {
         self.alignment = alignment
         self.flexibility = flexibility
         self.viewReuseId = viewReuseId
         self.viewReuseGroup = viewReuseGroup
         self.viewClass = V.self
         self.config = config
+        self.identifier = identifier
     }
 
-    init(alignment: Alignment, flexibility: Flexibility, viewReuseId: String? = nil, viewReuseGroup: String? = nil, viewClass: V.Type, config: ((V) -> Void)?) {
+    init(alignment: Alignment, flexibility: Flexibility, viewReuseId: String? = nil, viewReuseGroup: String? = nil, viewClass: V.Type, config: ((V) -> Void)?, identifier: String = UUID().uuidString) {
         self.alignment = alignment
         self.flexibility = flexibility
         self.viewReuseId = viewReuseId
         self.viewReuseGroup = viewReuseGroup
         self.viewClass = viewClass
         self.config = config
+        self.identifier = identifier
     }
 
     open func configure(view: V) {
